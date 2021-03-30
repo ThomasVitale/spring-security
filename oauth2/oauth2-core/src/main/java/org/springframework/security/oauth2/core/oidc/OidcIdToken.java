@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -226,6 +226,15 @@ public class OidcIdToken extends AbstractOAuth2Token implements IdTokenClaimAcce
 		 */
 		public Builder nonce(String nonce) {
 			return this.claim(IdTokenClaimNames.NONCE, nonce);
+		}
+
+		/**
+		 * Use this sessionId in the resulting {@link OidcIdToken}
+		 * @param sessionId The session identifier to use
+		 * @return the {@link Builder} for further configurations
+		 */
+		public Builder sessionId(String sessionId) {
+			return this.claim(IdTokenClaimNames.SID, sessionId);
 		}
 
 		/**

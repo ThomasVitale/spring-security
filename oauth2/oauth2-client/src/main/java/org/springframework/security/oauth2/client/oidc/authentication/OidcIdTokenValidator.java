@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,6 +115,12 @@ public final class OidcIdTokenValidator implements OAuth2TokenValidator<Jwt> {
 		// The acceptable range is Client specific.
 		if (now.plus(this.clockSkew).isBefore(idToken.getIssuedAt())) {
 			invalidClaims.put(IdTokenClaimNames.IAT, idToken.getIssuedAt());
+		}
+		// If the OpenID Provider supports Back-Channel Logout and the sid claim
+		// is provided, then it must not be empty.
+		String sessionId = idToken.getClaimAsString(IdTokenClaimNames.SID);
+		if (sessionId != null && sessionId.isEmpty()) {
+			invalidClaims.put(IdTokenClaimNames.SID, sessionId);
 		}
 		if (!invalidClaims.isEmpty()) {
 			return OAuth2TokenValidatorResult.failure(invalidIdToken(invalidClaims));

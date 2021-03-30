@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,6 +96,7 @@ public class OAuth2AuthorizedClientMixinTests {
 				.userNameAttributeName(null)
 				.jwkSetUri(null)
 				.issuerUri(null)
+				.backChannelLogoutUri(null)
 				.build();
 		// @formatter:on
 		OAuth2AuthorizedClient authorizedClient = new OAuth2AuthorizedClient(clientRegistration, this.principalName,
@@ -150,6 +151,7 @@ public class OAuth2AuthorizedClientMixinTests {
 		assertThat(clientRegistration.getProviderDetails().getConfigurationMetadata())
 				.containsExactlyEntriesOf(clientRegistration.getProviderDetails().getConfigurationMetadata());
 		assertThat(clientRegistration.getClientName()).isEqualTo(expectedClientRegistration.getClientName());
+		assertThat(clientRegistration.getBackChannelLogoutUri()).isEqualTo(expectedClientRegistration.getBackChannelLogoutUri());
 		assertThat(authorizedClient.getPrincipalName()).isEqualTo(expectedAuthorizedClient.getPrincipalName());
 		OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
 		assertThat(accessToken.getTokenType()).isEqualTo(expectedAccessToken.getTokenType());
@@ -173,6 +175,7 @@ public class OAuth2AuthorizedClientMixinTests {
 				.userNameAttributeName(null)
 				.jwkSetUri(null)
 				.issuerUri(null)
+				.backChannelLogoutUri(null)
 				.build();
 		// @formatter:on
 		OAuth2AccessToken expectedAccessToken = TestOAuth2AccessTokens.noScopes();
@@ -202,6 +205,7 @@ public class OAuth2AuthorizedClientMixinTests {
 		assertThat(clientRegistration.getProviderDetails().getIssuerUri()).isNull();
 		assertThat(clientRegistration.getProviderDetails().getConfigurationMetadata()).isEmpty();
 		assertThat(clientRegistration.getClientName()).isEqualTo(clientRegistration.getRegistrationId());
+		assertThat(clientRegistration.getBackChannelLogoutUri()).isNull();
 		assertThat(authorizedClient.getPrincipalName()).isEqualTo(expectedAuthorizedClient.getPrincipalName());
 		OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
 		assertThat(accessToken.getTokenType()).isEqualTo(expectedAccessToken.getTokenType());
@@ -272,7 +276,8 @@ public class OAuth2AuthorizedClientMixinTests {
 				"        " + configurationMetadata + "\n" +
 				"      }\n" +
 				"    },\n" +
-				"    \"clientName\": \"" + clientRegistration.getClientName() + "\"\n" +
+				"    \"clientName\": \"" + clientRegistration.getClientName() + "\",\n" +
+				"    \"backChannelLogoutUri\": " + ((clientRegistration.getBackChannelLogoutUri() != null) ? "\"" + clientRegistration.getBackChannelLogoutUri() + "\"" : null) + "\n" +
 				"}";
 		// @formatter:on
 	}

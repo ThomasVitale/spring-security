@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,6 +60,8 @@ public class ClientRegistrationTests {
 
 	private static final String CLIENT_NAME = "Client 1";
 
+	private static final String BACK_CHANNEL_LOGOUT_URI = "https://example.com/backchannel-logout";
+
 	private static final Map<String, Object> PROVIDER_CONFIGURATION_METADATA = Collections
 			.unmodifiableMap(createProviderConfigurationMetadata());
 
@@ -108,6 +110,7 @@ public class ClientRegistrationTests {
 				.issuerUri(ISSUER_URI)
 				.providerConfigurationMetadata(PROVIDER_CONFIGURATION_METADATA)
 				.clientName(CLIENT_NAME)
+				.backChannelLogoutUri(BACK_CHANNEL_LOGOUT_URI)
 				.build();
 		// @formatter:on
 		assertThat(registration.getRegistrationId()).isEqualTo(REGISTRATION_ID);
@@ -127,6 +130,7 @@ public class ClientRegistrationTests {
 		assertThat(registration.getProviderDetails().getConfigurationMetadata())
 				.isEqualTo(PROVIDER_CONFIGURATION_METADATA);
 		assertThat(registration.getClientName()).isEqualTo(CLIENT_NAME);
+		assertThat(registration.getBackChannelLogoutUri()).isEqualTo(BACK_CHANNEL_LOGOUT_URI);
 	}
 
 	@Test
@@ -828,6 +832,7 @@ public class ClientRegistrationTests {
 		assertThat(providerDetails.getConfigurationMetadata())
 				.isEqualTo(updatedProviderDetails.getConfigurationMetadata());
 		assertThat(clientRegistration.getClientName()).isEqualTo(updated.getClientName());
+		assertThat(clientRegistration.getBackChannelLogoutUri()).isEqualTo(updated.getBackChannelLogoutUri());
 	}
 
 	@Test

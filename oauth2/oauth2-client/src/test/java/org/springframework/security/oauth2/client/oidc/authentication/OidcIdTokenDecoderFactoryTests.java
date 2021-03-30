@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,6 +74,7 @@ public class OidcIdTokenDecoderFactoryTests {
 		assertThat(claimTypeConverters).containsKey(IdTokenClaimNames.IAT);
 		assertThat(claimTypeConverters).containsKey(IdTokenClaimNames.AUTH_TIME);
 		assertThat(claimTypeConverters).containsKey(IdTokenClaimNames.AMR);
+		assertThat(claimTypeConverters).containsKey(IdTokenClaimNames.SID);
 		assertThat(claimTypeConverters).containsKey(StandardClaimNames.EMAIL_VERIFIED);
 		assertThat(claimTypeConverters).containsKey(StandardClaimNames.PHONE_NUMBER_VERIFIED);
 		assertThat(claimTypeConverters).containsKey(StandardClaimNames.UPDATED_AT);

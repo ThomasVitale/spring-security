@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -139,6 +139,14 @@ public interface IdTokenClaimAccessor extends StandardClaimAccessor {
 	 */
 	default String getAuthorizationCodeHash() {
 		return this.getClaimAsString(IdTokenClaimNames.C_HASH);
+	}
+
+	/**
+	 * Returns the identifier for the End-User authenticated Session {@code (sid)}.
+	 * @return the Session identifier
+	 */
+	default String getSessionId() {
+		return this.getClaimAsString(IdTokenClaimNames.SID);
 	}
 
 }

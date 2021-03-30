@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,6 +59,8 @@ public class OidcIdTokenTests {
 
 	private static final String C_HASH_CLAIM = "c_hash";
 
+	private static final String SID_CLAIM = "sid";
+
 	private static final String ISS_VALUE = "https://provider.com";
 
 	private static final String SUB_VALUE = "subject1";
@@ -83,6 +85,8 @@ public class OidcIdTokenTests {
 
 	private static final String C_HASH_VALUE = "c_hash";
 
+	private static final String SID_VALUE = "session-id";
+
 	private static final Map<String, Object> CLAIMS;
 
 	private static final String ID_TOKEN_VALUE = "id-token-value";
@@ -100,6 +104,7 @@ public class OidcIdTokenTests {
 		CLAIMS.put(AZP_CLAIM, AZP_VALUE);
 		CLAIMS.put(AT_HASH_CLAIM, AT_HASH_VALUE);
 		CLAIMS.put(C_HASH_CLAIM, C_HASH_VALUE);
+		CLAIMS.put(SID_CLAIM, SID_VALUE);
 	}
 
 	@Test
@@ -132,6 +137,7 @@ public class OidcIdTokenTests {
 		assertThat(idToken.getAuthorizedParty()).isEqualTo(AZP_VALUE);
 		assertThat(idToken.getAccessTokenHash()).isEqualTo(AT_HASH_VALUE);
 		assertThat(idToken.getAuthorizationCodeHash()).isEqualTo(C_HASH_VALUE);
+		assertThat(idToken.getSessionId()).isEqualTo(SID_VALUE);
 	}
 
 }

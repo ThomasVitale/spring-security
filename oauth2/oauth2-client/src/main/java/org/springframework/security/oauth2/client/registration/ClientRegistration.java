@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,8 @@ public final class ClientRegistration implements Serializable {
 	private ProviderDetails providerDetails = new ProviderDetails();
 
 	private String clientName;
+
+	private String backChannelLogoutUri;
 
 	private ClientRegistration() {
 	}
@@ -166,6 +168,16 @@ public final class ClientRegistration implements Serializable {
 		return this.clientName;
 	}
 
+	/**
+	 * Returns the uri (or uri template) for the back-channel logout endpoint
+	 * that will cause the RP to log itself out when sent a Logout Token by the OP.
+	 *
+	 * @return the back-channel logout endpoint
+	 */
+	public String getBackChannelLogoutUri() {
+		return this.backChannelLogoutUri;
+	}
+
 	@Override
 	public String toString() {
 		// @formatter:off
@@ -179,6 +191,7 @@ public final class ClientRegistration implements Serializable {
 				+ '\'' + ", scopes=" + this.scopes
 				+ ", providerDetails=" + this.providerDetails
 				+ ", clientName='" + this.clientName + '\''
+				+ ", backChannelLogoutUri='" + this.backChannelLogoutUri + '\''
 				+ '}';
 		// @formatter:on
 	}
@@ -365,6 +378,8 @@ public final class ClientRegistration implements Serializable {
 
 		private String clientName;
 
+		private String backChannelLogoutUri;
+
 		private Builder(String registrationId) {
 			this.registrationId = registrationId;
 		}
@@ -389,6 +404,7 @@ public final class ClientRegistration implements Serializable {
 				this.configurationMetadata = new HashMap<>(configurationMetadata);
 			}
 			this.clientName = clientRegistration.clientName;
+			this.backChannelLogoutUri = clientRegistration.backChannelLogoutUri;
 		}
 
 		/**
@@ -605,6 +621,16 @@ public final class ClientRegistration implements Serializable {
 		}
 
 		/**
+		 * Sets the uri for the back-channel logout endpoint.
+		 * @param backChannelLogoutUri the uri for the back-channel logout endpoint
+		 * @return the {@link Builder}
+		 */
+		public Builder backChannelLogoutUri(String backChannelLogoutUri) {
+			this.backChannelLogoutUri = backChannelLogoutUri;
+			return this;
+		}
+
+		/**
 		 * Builds a new {@link ClientRegistration}.
 		 * @return a {@link ClientRegistration}
 		 */
@@ -639,6 +665,7 @@ public final class ClientRegistration implements Serializable {
 			clientRegistration.providerDetails = createProviderDetails(clientRegistration);
 			clientRegistration.clientName = StringUtils.hasText(this.clientName) ? this.clientName
 					: this.registrationId;
+			clientRegistration.backChannelLogoutUri = this.backChannelLogoutUri;
 			return clientRegistration;
 		}
 

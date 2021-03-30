@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -293,6 +293,23 @@ public class OidcIdTokenValidatorTests {
 				.allMatch((msg) -> msg.contains(IdTokenClaimNames.AUD))
 				.allMatch((msg) -> msg.contains(IdTokenClaimNames.IAT))
 				.allMatch((msg) -> msg.contains(IdTokenClaimNames.EXP));
+		// @formatter:on
+	}
+
+	@Test
+	public void validateWhenSidDefinedAndPresentValueThenNoErrors() {
+		this.claims.put(IdTokenClaimNames.SID, "session-id");
+		assertThat(this.validateIdToken()).isEmpty();
+	}
+
+	@Test
+	public void validateWhenSidDefinedButEmptyThenHasErrors() {
+		this.claims.put(IdTokenClaimNames.SID, "");
+		// @formatter:off
+		assertThat(this.validateIdToken())
+				.hasSize(1)
+				.extracting(OAuth2Error::getDescription)
+				.allMatch((msg) -> msg.contains(IdTokenClaimNames.SID));
 		// @formatter:on
 	}
 

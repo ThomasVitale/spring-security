@@ -43,7 +43,8 @@ public final class TestClientRegistrations {
 				.userNameAttributeName("id")
 				.clientName("Client Name")
 				.clientId("client-id")
-				.clientSecret("client-secret");
+				.clientSecret("client-secret")
+				.backChannelLogoutUri("https://example.com/backchannel-logout");
 		// @formatter:on
 	}
 

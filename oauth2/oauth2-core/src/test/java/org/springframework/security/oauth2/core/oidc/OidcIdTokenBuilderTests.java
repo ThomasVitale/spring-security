@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 /**
- * Tests for {@link OidcUserInfo}
+ * Tests for {@link OidcIdToken.Builder}
  */
 public class OidcIdTokenBuilderTests {
 
@@ -113,6 +113,17 @@ public class OidcIdTokenBuilderTests {
 		// @formatter:on
 		assertThat(idToken.getClaims()).hasSize(1);
 		assertThat(idToken.getClaims().get(name)).isSameAs(value);
+	}
+
+	@Test
+	public void claimsWhenAddingSessionIdThenIsPresent() {
+		OidcIdToken.Builder idTokenBuilder = OidcIdToken.withTokenValue("token");
+		String sessionId = "session-id";
+		OidcIdToken idToken = idTokenBuilder
+				.sessionId(sessionId)
+				.build();
+		assertThat(idToken.getClaims()).hasSize(1);
+		assertThat(idToken.getSessionId()).isSameAs(sessionId);
 	}
 
 }

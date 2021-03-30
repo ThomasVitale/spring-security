@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,6 +110,7 @@ public final class ReactiveOidcIdTokenDecoderFactory implements ReactiveJwtDecod
 		converters.put(IdTokenClaimNames.IAT, instantConverter);
 		converters.put(IdTokenClaimNames.AUTH_TIME, instantConverter);
 		converters.put(IdTokenClaimNames.AMR, collectionStringConverter);
+		converters.put(IdTokenClaimNames.SID, stringConverter);
 		converters.put(StandardClaimNames.EMAIL_VERIFIED, booleanConverter);
 		converters.put(StandardClaimNames.PHONE_NUMBER_VERIFIED, booleanConverter);
 		converters.put(StandardClaimNames.UPDATED_AT, instantConverter);

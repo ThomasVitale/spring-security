@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.OidcLogoutToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
@@ -50,6 +51,7 @@ import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
  * <li>{@link OAuth2UserAuthorityMixin}</li>
  * <li>{@link DefaultOAuth2UserMixin}</li>
  * <li>{@link OidcIdTokenMixin}</li>
+ * <li>{@link OidcLogoutTokenMixin}</li>
  * <li>{@link OidcUserInfoMixin}</li>
  * <li>{@link OidcUserAuthorityMixin}</li>
  * <li>{@link DefaultOidcUserMixin}</li>
@@ -81,6 +83,7 @@ import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
  * @see OAuth2UserAuthorityMixin
  * @see DefaultOAuth2UserMixin
  * @see OidcIdTokenMixin
+ * @see OidcLogoutTokenMixin
  * @see OidcUserInfoMixin
  * @see OidcUserAuthorityMixin
  * @see DefaultOidcUserMixin
@@ -107,6 +110,7 @@ public class OAuth2ClientJackson2Module extends SimpleModule {
 		context.setMixInAnnotations(OAuth2UserAuthority.class, OAuth2UserAuthorityMixin.class);
 		context.setMixInAnnotations(DefaultOAuth2User.class, DefaultOAuth2UserMixin.class);
 		context.setMixInAnnotations(OidcIdToken.class, OidcIdTokenMixin.class);
+		context.setMixInAnnotations(OidcLogoutToken.class, OidcLogoutTokenMixin.class);
 		context.setMixInAnnotations(OidcUserInfo.class, OidcUserInfoMixin.class);
 		context.setMixInAnnotations(OidcUserAuthority.class, OidcUserAuthorityMixin.class);
 		context.setMixInAnnotations(DefaultOidcUser.class, DefaultOidcUserMixin.class);
